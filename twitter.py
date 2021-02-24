@@ -1,10 +1,12 @@
 import tweepy, csv
+from dotenv import load_dotenv
+load_dotenv()
 
-consumer_key = "Y0HnPFqOLaBt9H6rGCq5e6hd5"
-consumer_secret = "dwqrD2j7rDhcAuUfC4AR9WvbDLE1jhp0DOdXrSrDg3oeqxgDie"
-
-access_token = "359234637-axnhFKE5l9NJfJ7Z1q0rhLQ3Wtbwj4U8lrP0DYVm"
-access_token_secret = "qpJGmSVJxvMgLdoAdSq2WJw4zM542J0yWRIBX6atonfU3"
+import os
+consumer_key = os.getenv("CONSUMER_KEY")
+consumer_secret = os.getenv("CONSUMER_SECRET")
+access_token = os.getenv("ACCESS_TOKEN")
+access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
 
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
@@ -23,10 +25,11 @@ api.verify_credentials()
 ## Task: Is to get at least 1000 tweets from the twitter API and save it
 ## To a CSV file
 
-file_out = open("tweets.csv", "w+")
+file_out = open("tweets.csv", "w+", encoding="utf-8")
 writer = csv.writer(file_out)
 
 i=0
+writer.writerow(["created_at", "screen_name", "text"])
 for item in tweepy.Cursor(api.search, q="Encephalitis Syndrome").items(100):
     tweet = []
     print("Adding item",i, item.id)
