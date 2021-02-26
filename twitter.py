@@ -25,12 +25,12 @@ api.verify_credentials()
 ## Task: Is to get at least 1000 tweets from the twitter API and save it
 ## To a CSV file
 
-file_out = open("tweets.csv", "w+", encoding="utf-8")
+file_out = open("tweets1.csv", "w+", encoding="utf-8")
 writer = csv.writer(file_out)
 
 i=0
 writer.writerow(["created_at", "screen_name", "text"])
-for item in tweepy.Cursor(api.search, q="Encephalitis Syndrome").items(100):
+for item in tweepy.Cursor(api.search, q="Michel Atieno").items(100):
     tweet = []
     print("Adding item",i, item.id)
     i+=1
